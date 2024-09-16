@@ -8,42 +8,42 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 </head>
 <body class="d-flex flex-column min-vh-100">
+
     <!-- Navbar -->
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ route('articles.index') }}">Philippine Coast Guard</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('articles.create') }}">Create Article</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('articles.index') }}">Articles</a>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-navbar shadow-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('articles.index') }}">
+                Philippine Coast Guard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('articles.create') }}">Create Article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('articles.index') }}">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('newsarticle') }}">News Articles</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="">About Us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Contact</a>
+                    </li>
+
+
+                
+                </ul>
+            </div>
         </div>
-    </nav> -->
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-navbar">
-    <a class="navbar-brand" href="{{ route('articles.index') }}">Philippine Coast Guard</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('articles.create') }}">Create Article</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('articles.index') }}">Articles</a>
-            </li>
-        </ul>
-    </div>
     </nav>
-
-
 
     <!-- Main Content -->
     <main role="main" class="flex-shrink-0">

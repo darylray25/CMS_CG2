@@ -3,11 +3,24 @@
 @section('content')
     <div class="container mt-4">
         <!-- Article Title -->
-        <h1 class="my-4">{{ $article->title }}</h1>
+        <div class="text-center mb-4">
+            <h1 class="font-weight-bold text-dark" style="font-size: 2.5rem;">{{ $article->title }}</h1>
+        </div>
 
-        <!-- Article Image -->
+        <!-- Article Media -->
         @if($article->image)
-            <img src="{{ asset('storage/images/' . $article->image) }}" class="img-fluid mb-4" alt="{{ $article->title }}" style="width: 800px; height: 400px; object-fit: cover;">
+        <div class="text-center mb-4">
+            @if (in_array(pathinfo($article->image, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']))
+                <!-- Image -->
+                <img src="{{ asset('storage/media/' . $article->image) }}" class="img-fluid mb-4" alt="{{ $article->title }}" style="width: 800px; height: 400px; object-fit: cover;">
+            @elseif (in_array(pathinfo($article->image, PATHINFO_EXTENSION), ['mp4', 'avi', 'mov', 'mkv']))
+                <!-- Video -->
+                <video controls class="img-fluid mb-4" style="width: 800px; height: 400px;">
+                    <source src="{{ asset('storage/media/' . $article->image) }}" type="video/{{ pathinfo($article->image, PATHINFO_EXTENSION) }}">
+                    Your browser does not support the video tag.
+                </video>
+            @endif
+            </div>
         @endif
 
         <!-- Article Content -->
