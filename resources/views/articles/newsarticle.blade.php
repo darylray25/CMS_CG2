@@ -12,39 +12,37 @@
         <div class="row">
             @forelse ($articles as $article)
                 <div class="col-md-4 mb-4">
-                    <div class="card border-light shadow-sm">
-                        <!-- Article Media -->
-                        @if($article->image)
-                            @php
-                                $extension = pathinfo($article->image, PATHINFO_EXTENSION);
-                            @endphp
-                            @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                <!-- Image -->
-                                <a href="{{ route('articles.show', $article->id) }}">
+                    <a href="{{ route('articles.show', $article->id) }}" class="text-decoration-none">
+                        <div class="card border-light shadow-sm">
+                            <!-- Article Media -->
+                            @if($article->image)
+                                @php
+                                    $extension = pathinfo($article->image, PATHINFO_EXTENSION);
+                                @endphp
+                                @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                                    <!-- Image -->
                                     <img src="{{ asset('storage/media/' . $article->image) }}" class="card-img-top article-media" alt="{{ $article->title }}">
-                                </a>
-                            @elseif (in_array($extension, ['mp4', 'avi', 'mov', 'mkv']))
-                                <!-- Video -->
-                                <a href="{{ route('articles.show', $article->id) }}">
+                                @elseif (in_array($extension, ['mp4', 'avi', 'mov', 'mkv']))
+                                    <!-- Video -->
                                     <video controls class="card-img-top article-media">
                                         <source src="{{ asset('storage/media/' . $article->image) }}" type="video/{{ $extension }}">
                                         Your browser does not support the video tag.
                                     </video>
-                                </a>
+                                @endif
                             @endif
-                        @endif
 
-                        <!-- Article Body -->
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">{{ $article->title }}</h5>
-                            <p class="card-text flex-fill">{{ Str::limit($article->content, 100) }}</p>
-                        </div>
+                            <!-- Article Body -->
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ $article->title }}</h5>
+                                <p class="card-text flex-fill">{{ Str::limit($article->content, 100) }}</p>
+                            </div>
 
-                        <!-- Article Footer -->
-                        <div class="card-footer text-muted">
-                            Published on {{ $article->created_at->format('F j, Y') }}
+                            <!-- Article Footer -->
+                            <div class="card-footer text-muted">
+                                Published on {{ $article->created_at->format('F j, Y') }}
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @empty
                 <p class="text-center col-12">No articles found.</p>
@@ -89,7 +87,7 @@
         padding: 1.5rem;
         display: flex;
         flex-direction: column;
-        height: 120px; /* Adjust this value as needed */
+        height: 100px; /* Adjust this value as needed */
         overflow: hidden;
     }
 
@@ -139,6 +137,11 @@
 
     .article-media:hover {
         transform: scale(1.1);
+    }
+
+    /* Remove text decoration for the link */
+    .text-decoration-none {
+        text-decoration: none;
     }
 
     /* Responsive Styles */
