@@ -19,6 +19,18 @@ class ArticleController extends Controller
         return view('articles.index', compact('articles'));
     }
 
+     /**
+     * Display a listing of the articles.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function newsarticle()
+{
+    $articles = Article::all();
+    // dd($articles);
+    return view('articles.newsarticle', compact('articles'));
+}
+
     /**
      * Show the form for creating a new article.
      *
@@ -40,12 +52,12 @@ class ArticleController extends Controller
         $data = $request->validate([
             'title'   => 'required|string|max:255',
             'content' => 'required|string',
-            'image'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'   => 'nullable|file|mimes:jpeg,png,jpg,gif,mp4,avi,mov,mkv|max:51200', // 50MB max size
         ]);
 
-        // Handle image upload
+        // Handle media upload
         if ($request->hasFile('image')) {
-            $data['image'] = $this->handleImageUpload($request->file('image'));
+            $data['image'] = $this->handleMediaUpload($request->file('image'));
         }
 
         Article::create($data);
@@ -60,7 +72,7 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Article $article)
-    {
+    {  $articles = Article::all();
         return view('articles.show', compact('article'));
     }
 
@@ -87,13 +99,13 @@ class ArticleController extends Controller
         $data = $request->validate([
             'title'   => 'required|string|max:255',
             'content' => 'required|string',
-            'image'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'   => 'nullable|file|mimes:jpeg,png,jpg,gif,mp4,avi,mov,mkv|max:51200', // 50MB max size
         ]);
 
-        // Handle image upload
+        // Handle media upload
         if ($request->hasFile('image')) {
-            $this->deleteOldImage($article->image);
-            $data['image'] = $this->handleImageUpload($request->file('image'));
+            $this->deleteOldMedia($article->image);
+            $data['image'] = $this->handleMediaUpload($request->file('image'));
         }
 
         $article->update($data);
@@ -109,35 +121,48 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        $this->deleteOldImage($article->image);
+        $this->deleteOldMedia($article->image);
         $article->delete();
 
         return redirect()->route('articles.index')->with('success', 'Article deleted successfully.');
     }
 
     /**
-     * Handle image upload and return the file name.
+     * Handle media upload and return the file name.
      *
-     * @param  \Illuminate\Http\UploadedFile  $image
+     * @param  \Illuminate\Http\UploadedFile  $media
      * @return string
      */
-    protected function handleImageUpload($image)
+    protected function handleMediaUpload($media)
     {
-        $originalName = $image->getClientOriginalName();
-        $image->storeAs('public/images', $originalName);
-        return $originalName;
+        $originalName = $media->getClientOriginalName();
+        $path = 'public/media';
+        
+        // Ensure the file name is unique
+        $filename = pathinfo($originalName, PATHINFO_FILENAME);
+        $extension = $media->getClientOriginalExtension();
+        $uniqueName = $originalName;
+
+        $i = 1;
+        while (Storage::exists($path . '/' . $uniqueName)) {
+            $uniqueName = $filename . '_' . $i . '.' . $extension;
+            $i++;
+        }
+
+        $media->storeAs($path, $uniqueName);
+        return $uniqueName;
     }
 
     /**
-     * Delete the old image from storage if it exists.
+     * Delete the old media from storage if it exists.
      *
-     * @param  string|null  $imageName
+     * @param  string|null  $mediaName
      * @return void
      */
-    protected function deleteOldImage($imageName)
+    protected function deleteOldMedia($mediaName)
     {
-        if ($imageName) {
-            Storage::delete('public/images/' . $imageName);
+        if ($mediaName) {
+            Storage::delete('public/media/' . $mediaName);
         }
     }
 }

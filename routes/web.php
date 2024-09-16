@@ -18,4 +18,10 @@ Route::get('/', function () {
 });
 
 
+// Route::resource('articles', ArticleController::class);
+// Define a route for the newsarticle method
+Route::get('/articles/news', [ArticleController::class, 'newsarticle'])->name('newsarticle');
+
+// Define resource routes for ArticleController
 Route::resource('articles', ArticleController::class);
+
