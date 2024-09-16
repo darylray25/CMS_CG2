@@ -1,0 +1,79 @@
+/* Ensure the footer sticks to the bottom of the page */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+}
+
+/* Footer styling */
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 1rem;  /* Scalable padding */
+    text-align: center;
+    border-top: 1px solid #ddd;
+    margin-top: auto;  /* Ensure the footer sticks to the bottom */
+}
+
+footer p {
+    margin: 0;
+    font-size: 1.2rem;  /* Use rem for better scalability */
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    footer p {
+        font-size: 1.5rem;  /* Adjust font size for small screens */
+    }
+}
+
+/* Jumbotron text color */
+.jumbotron {
+    color: #000;  /* Set text color to black */
+}
+
+.jumbotron .display-4,
+.jumbotron .lead {
+    color: #000;  /* Ensure headings and leads are black */
+}
+
+
+
+
+
+
+
+/* Navbar Styling */
+.custom-navbar {
+    padding: 0.75rem 1.5rem; /* Padding for the navbar */
+    border-bottom: 1px solid #343a40; /* Dark border for separation */
+    margin-bottom: 1rem; /* Margin below the navbar */
+}
+
+/* Navbar Brand Styling */
+.custom-navbar .navbar-brand {
+    font-size: 1.25rem; /* Adjust font size if needed */
+    font-weight: bold; /* Bold text for emphasis */
+}
+
+/* Navbar Link Styling */
+.custom-navbar .nav-link {
+    padding: 0.5rem 1rem; /* Padding for each link */
+    font-size: 1rem; /* Adjust font size if needed */
+}
+
+/* Navbar Toggler Styling */
+.custom-navbar .navbar-toggler {
+    border: 1px solid #ffffff; /* White border for the toggler */
+    border-radius: 0.25rem; /* Rounded corners for the toggler */
+}
+
+/* Navbar Toggler Icon Styling */
+.custom-navbar .navbar-toggler-icon {
+    background-image: url('data:image/svg+xml,...'); /* Optional: customize the icon */
+}
