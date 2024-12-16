@@ -12,10 +12,10 @@
         <div class="text-center mb-4">
             @if (in_array(pathinfo($article->image, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']))
                 <!-- Image -->
-                <img src="{{ asset('storage/media/' . $article->image) }}" class="img-fluid mb-4" alt="{{ $article->title }}" style="width: 800px; height: 400px; object-fit: cover;">
+                <img src="{{ asset('storage/media/' . $article->image) }}" class="img-fluid mb-4 rounded" alt="{{ $article->title }}" style="width: 800px; height: 400px; object-fit: cover;">
             @elseif (in_array(pathinfo($article->image, PATHINFO_EXTENSION), ['mp4', 'avi', 'mov', 'mkv']))
                 <!-- Video -->
-                <video controls class="img-fluid mb-4" style="width: 800px; height: 400px;">
+                <video controls class="img-fluid mb-4 rounded" style="width: 800px; height: 400px;">
                     <source src="{{ asset('storage/media/' . $article->image) }}" type="video/{{ pathinfo($article->image, PATHINFO_EXTENSION) }}">
                     Your browser does not support the video tag.
                 </video>
